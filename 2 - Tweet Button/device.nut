@@ -50,7 +50,15 @@ function getSensorData(val) {
 };
 
 function onButtonPressed() {
-    // TODO: Implement button pressing.
+    local state = button.read();
+    if(state == 1) {
+        agent.send("onButtonPressed", state);
+    }
 };
 
+// Register handlers... Have to do it after declaring onbuttonpressed;
+// Uses embedded resistors. Reads high by default, but all of it is transparent.
+button.configure(DIGITAL_IN_PULLUP, onButtonPressed);
+
+//
 agent.on("setRegistration", setRegistration);
