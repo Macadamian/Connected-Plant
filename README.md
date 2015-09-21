@@ -1,4 +1,4 @@
-[Follow](https://twitter.com/office_shrub), and see its current statistics on its [website](https://iot613-officeshrub.azurewebsites.net/). 
+[Follow](https://twitter.com/office_shrub), and see the default plant's current stats on its [website](https://iot613-officeshrub.azurewebsites.net/). 
 
 
 ## Prerequisites
@@ -31,6 +31,7 @@ Consumer Secret (API Secret)
 Access Token
 Access Token Secret	
 ```
+
 ##### Office Shrub [IOT613 Server]
 [Register](https://iot613-officeshrub.azurewebsites.net/register.html) your device, but only when you have all relevant information. The server does not retain any information, and will be restarted before and after the workshop.
 
