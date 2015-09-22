@@ -36,3 +36,6 @@ Access Token Secret
 [Register](https://iot613-officeshrub.azurewebsites.net/register.html) your device, but only when you have all relevant information. The server does not retain any information, and will be restarted before and after the workshop.
 
 Your device will be available on the [main dashboard](https://iot613-officeshrub.azurewebsites.net/).
+
+##### Bootstrap your application
+Start bootstrapping your application with the agent.nut and device.nut files [here](https://github.com/Macadamian/Connected-Plant/tree/master/0%20-%20Initial%20State)
