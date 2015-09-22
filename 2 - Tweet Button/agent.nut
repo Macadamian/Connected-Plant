@@ -27,22 +27,6 @@ function setRegistration(request, response) {
     }
 };
 
-function fetchRegistration() {
-    // TODO: Fetch registration from the server.
-};
-
-function setAlerts(request, response) {
-    // TODO: implement PUT alerts.
-};
-
-function getAlerts(request, response) {
-    // TODO: Implement GET Alerts
-};
-
-function requestSensorData(request, response) {
-    // TODO: Implement requesting light + water sensor data.
-};
-
 function onWebRequest(request, response) {
     if(!device.isconnected()) {
         response.send(404, "Device is offline.");
@@ -54,7 +38,7 @@ function onWebRequest(request, response) {
             request.method == "POST") {
             setRegistration(request, response);
         } else {
-            response.send(200, "{\"error\": \"Not a valid operation\"}");
+            response.send(400, "{\"error\": \"Not a valid operation\"}");
         }
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
@@ -71,12 +55,3 @@ device.on("onButtonPressed", function(data){
 
 // This line is important. It allows the imp cloud to process any HTTP request that we make to the electricimp.
 http.onrequest(onWebRequest);
-
-// Handles a device coming offline, and then going online.
-device.onconnect(function() {
-    // TODO: Handle device connecting to the imp cloud.
-});
-
-device.ondisconnect(function() {
-    // TODO: Handle device disconnecting to the imp cloud.
-});

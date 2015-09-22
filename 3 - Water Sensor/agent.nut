@@ -26,18 +26,6 @@ function setRegistration(request, response) {
     }
 };
 
-function fetchRegistration() {
-    // TODO: Fetch registration from the server.
-};
-
-function setAlerts(request, response) {
-    // TODO: implement PUT alerts.
-};
-
-function getAlerts(request, response) {
-    // TODO: Implement GET Alerts
-};
-
 function requestSensorData(request, response) {
     device.send("requestSensorData", 0);
 
@@ -62,7 +50,7 @@ function onWebRequest(request, response) {
         else if ("all" in request.query) {
             requestSensorData(request, response);
         } else {
-            response.send(200, "{\"error\": \"Not a valid operation\"}");
+            response.send(400, "{\"error\": \"Not a valid operation\"}");
         }
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
@@ -79,12 +67,3 @@ device.on("onButtonPressed", function(data){
 
 // Register the HTTP handler to begin watching for incoming HTTP requests
 http.onrequest(onWebRequest);
-
-// Handles a device coming offline, and then going online.
-device.onconnect(function() {
-    // TODO: Handle device connecting to the imp cloud.
-});
-
-device.ondisconnect(function() {
-    // TODO: Handle device disconnecting to the imp cloud.
-});
