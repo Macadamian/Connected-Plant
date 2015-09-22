@@ -83,6 +83,6 @@ button.configure(DIGITAL_IN_PULLUP, onButtonPressed);
 
 // Register a handler for "led" messages from the agent
 agent.on("requestSensorData", getSensorData);
+agent.on("setRegistration", setRegistration);
 agent.on("setAlerts", setAlerts);
 agent.on("getAlerts", getAlerts);
-agent.on("setRegistration", setRegistration);

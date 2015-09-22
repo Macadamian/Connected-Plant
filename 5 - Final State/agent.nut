@@ -25,7 +25,7 @@ function setRegistration(request, response) {
         server.log(err);
         response.send(500, "Internal Server Error No Plant Name provided: " + err);
     }
-}
+};
 
 function fetchRegistration() {
     try {
@@ -47,7 +47,7 @@ function fetchRegistration() {
     } catch(err) {
         server.log("Could not fetch the registration: " + err);
     }
-}
+};
 
 function setAlerts(request, response) {
     local alerts = {};
@@ -75,7 +75,7 @@ function setAlerts(request, response) {
             response.send(200, "OK");
         });
     }
-}
+};
 
 function getAlerts(request, response) {
     device.send("getAlerts", 0);
@@ -83,7 +83,7 @@ function getAlerts(request, response) {
         // server.log("Water Alert: " + alerts.water + " Light Alert: " + alerts.light);
         response.send(200, "{\"water\": \"" + alerts.water + "\", \"light\": \"" + alerts.light + "\"}");
     });
-}
+};
 
 function requestSensorData(request, response) {
     device.send("requestSensorData", 0);
@@ -92,7 +92,7 @@ function requestSensorData(request, response) {
         server.log("Water Sensor: " + val.water + " Light Sensor: " + val.light);
         response.send(200, "{\"water\": \"" + val.water + "\", \"light\": \"" + val.light + "\"}");
     });
-}
+};
 
 function onWebRequest(request, response) {
     if(!device.isconnected()) {
@@ -123,7 +123,7 @@ function onWebRequest(request, response) {
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
     }
-}
+};
 
 device.on("onButtonPressed", function(data){
     local shareUrl = serverURL + "/" + agentId + "/share";
@@ -132,6 +132,9 @@ device.on("onButtonPressed", function(data){
     local response = request.sendsync();
     server.log("button press statuscode: " + response.statuscode);
 });
+
+// Register the HTTP handler to begin watching for incoming HTTP requests
+http.onrequest(onWebRequest);
 
 // Handles a device coming offline, and then going online.
 device.onconnect(function() {
@@ -145,6 +148,3 @@ device.ondisconnect(function() {
     server.log("Device Disconnected!");
     device.send("setRegistration", 0);
 });
-
-// Register the HTTP handler to begin watching for incoming HTTP requests
-http.onrequest(onWebRequest);
