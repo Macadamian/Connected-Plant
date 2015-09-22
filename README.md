@@ -14,7 +14,7 @@ Once you have the account and are logged on, press the `Create New Model` button
 You need to download the Electric Imp Mobile application. Get it for [Android](https://play.google.com/store/apps/details?id=com.electricimp.electricimp) or [iOS](https://itunes.apple.com/us/app/electric-imp/id547133856?mt=8).
 
 You need an Electric Imp device to move forward.
-Log on with your credentials in the application. You will then need to connect to your WiFi network of choice. BlinkUp your Electric Imp device like this: https://www.youtube.com/watch?v=zbhu7Mwicok
+Log on with your credentials in the application. You will then need to connect to your WiFi network of choice. BlinkUp your Electric Imp device like this: https://www.youtube.com/watch?v=zbhu7Mwicok. Troubleshoot issues with this [guide](https://electricimp.com/docs/troubleshooting/blinkup/).
 
 Now go back to the Electric Imp IDE. Click on `Unassigned Devices`, your device should be there. Pair it with your `Connected-Plant` model. Your imp is now ready to go.
 
