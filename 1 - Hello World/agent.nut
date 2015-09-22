@@ -2,7 +2,7 @@
 local serverURL = "http://iot613-officeshrub.azurewebsites.net";
 local agentId = split(http.agenturl(), "/")[2];
 
-server.log("Set Registration [POST]: " + http.agenturl() + "?registration=true");
+server.log("Set Registration [POST]: " + http.agenturl() + "register=true");
 
 function setRegistration(request, response) {
     try {

@@ -3,8 +3,8 @@
 local serverURL = "http://iot613-officeshrub.azurewebsites.net";
 local agentId = split(http.agenturl(), "/")[2];
 
-server.log("Request sensor data: " + http.agenturl() + "?all=read");
-server.log("Set Alert Mode: " + http.agenturl() + "?alert&light=on&water=on");
+server.log("Share Status: " + serverURL + "/" + agentId + "/share");
+server.log("Set Registration [POST]: " + http.agenturl() + "register=true");
 
 function setRegistration(request, response) {
     try {
