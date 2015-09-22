@@ -18,6 +18,8 @@ Log on with your credentials in the application. You will then need to connect t
 
 Now go back to the Electric Imp IDE. Click on `Unassigned Devices`, your device should be there. Pair it with your `Connected-Plant` model. Your imp is now ready to go.
 
+Electric Imp uses an [API](https://electricimp.com/docs/api/) programmed in [Squirrel](https://electricimp.com/docs/squirrel/).
+
 ##### Twitter
 You need a twitter account that's enabled for applications to proceed. *We recommend creating a new twitter account.*
 
