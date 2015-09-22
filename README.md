@@ -38,4 +38,4 @@ Access Token Secret
 Your device will be available on the [main dashboard](https://iot613-officeshrub.azurewebsites.net/).
 
 ##### Bootstrap your application
-Start bootstrapping your application with the agent.nut and device.nut files [here](https://github.com/Macadamian/Connected-Plant/tree/master/0%20-%20Initial%20State)
+Start bootstrapping your application with the agent.nut and device.nut files [here](https://github.com/Macadamian/Connected-Plant/tree/master/0%20-%20Initial%20State).
