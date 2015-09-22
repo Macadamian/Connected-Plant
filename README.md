@@ -1,3 +1,8 @@
+## About this repository 
+
+Contains instructions and some of the bootstrapping required for the [IOT613](http:///www.iot613.com) technical workshop.
+It also contains circuit designs and code for every step in the workshop.
+
 [Follow](https://twitter.com/office_shrub), and see the default plant's current stats on its [website](https://iot613-officeshrub.azurewebsites.net/). 
 
 
