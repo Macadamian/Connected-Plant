@@ -3,7 +3,6 @@ local serverURL = "http://iot613-officeshrub.azurewebsites.net";
 local agentId = split(http.agenturl(), "/")[2];
 
 server.log("Request sensor data: " + http.agenturl() + "?all=read");
-server.log("Set Registration: " + http.agenturl() + "register=true");
 server.log("Set Alert Mode: " + http.agenturl() + "?alert&light=on&water=on");
 
 function setRegistration(request, response) {
@@ -28,61 +27,15 @@ function setRegistration(request, response) {
 };
 
 function fetchRegistration() {
-    try {
-        server.log("Fetching registration status from the server.");
-        local isRegisteredUrl = serverURL + "/" + agentId + "/registered";
-        local request = http.get(isRegisteredUrl, {});
-        local response = request.sendsync();
-
-        if(response.statuscode == 200) {
-            local data = http.jsondecode(response.body);
-            device.send("setRegistration", data.isRegistered);
-            device.on("onSetRegistration", function(value) {
-                server.log("Successfully registered device");
-            });
-        } else {
-            server.log("Could not fetch the registration.");
-        }
-
-    } catch(err) {
-        server.log("Could not fetch the registration: " + err);
-    }
+    // TODO: Fetch registration from the server.
 };
 
 function setAlerts(request, response) {
-    local alerts = {};
-    try {
-        if (request.query.light != null) {
-            server.log("Set Light Alert: " + request.query.light);
-            alerts.light <- request.query.light == "true" ? 1 : 0;
-        }
-    } catch(err) {
-        alerts.light <- null;
-    }
-
-    try {
-        if (request.query.water != null) {
-            server.log("Set Water alert: " + request.query.water);
-            alerts.water <- request.query.water == "true" ? 1 : 0;
-        }
-    } catch(err) {
-        alerts.water <- null;
-    }
-
-    if(alerts.light != null || alerts.water != null) {
-        device.send("setAlerts", alerts);
-        device.on("onSetAlerts", function(val) {
-            response.send(200, "OK");
-        });
-    }
+    // TODO: implement PUT alerts.
 };
 
 function getAlerts(request, response) {
-    device.send("getAlerts", 0);
-    device.on("onGetAlerts", function(alerts) {
-        // server.log("Water Alert: " + alerts.water + " Light Alert: " + alerts.light);
-        response.send(200, "{\"water\": \"" + alerts.water + "\", \"light\": \"" + alerts.light + "\"}");
-    });
+    // TODO: Implement GET Alerts
 };
 
 function requestSensorData(request, response) {
@@ -101,16 +54,7 @@ function onWebRequest(request, response) {
     }
 
     try {
-        // Check if the user sent led as a query parameter
-        if ("alert" in request.query)
-        {
-            if(request.method == "POST") {
-                setAlerts(request, response);
-            } else if(request.method == "GET") {
-                getAlerts(request, response);
-            }
-        }
-        else if("register" in request.query &&
+        if("register" in request.query &&
             request.method == "POST") {
             setRegistration(request, response);
         }
@@ -138,13 +82,9 @@ http.onrequest(onWebRequest);
 
 // Handles a device coming offline, and then going online.
 device.onconnect(function() {
-    server.log("Device connected to agent - Syncing with Server");
-    fetchRegistration();
-
-    // TODO: sync alerts - with server
+    // TODO: Handle device connecting to the imp cloud.
 });
 
 device.ondisconnect(function() {
-    server.log("Device Disconnected!");
-    device.send("setRegistration", 0);
+    // TODO: Handle device disconnecting to the imp cloud.
 });
