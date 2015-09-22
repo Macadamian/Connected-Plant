@@ -1,5 +1,4 @@
 
-
 local serverURL = "http://iot613-officeshrub.azurewebsites.net";
 local agentId = split(http.agenturl(), "/")[2];
 
@@ -40,7 +39,12 @@ function getAlerts(request, response) {
 };
 
 function requestSensorData(request, response) {
-    // TODO: Implement requesting light + water sensor data.
+    device.send("requestSensorData", 0);
+
+    device.on("onSensorData", function(val) {
+        server.log("Water Sensor: " + val.water + " Light Sensor: " + val.light);
+        response.send(200, "{\"water\": \"" + val.water + "\", \"light\": \"" + val.light + "\"}");
+    });
 };
 
 function onWebRequest(request, response) {
@@ -50,9 +54,15 @@ function onWebRequest(request, response) {
     }
 
     try {
+        local payload = "Not a valid operation";
+
         if("register" in request.query &&
             request.method == "POST") {
             setRegistration(request, response);
+        }
+        // Connected Plant Sensor query handling.
+        else if ("all" in request.query) {
+            requestSensorData(request, response);
         } else {
             response.send(200, "{\"error\": \"Not a valid operation\"}");
         }
@@ -69,7 +79,7 @@ device.on("onButtonPressed", function(data){
     server.log("button press statuscode: " + response.statuscode);
 });
 
-// This line is important. It allows the imp cloud to process any HTTP request that we make to the electricimp.
+// Register the HTTP handler to begin watching for incoming HTTP requests
 http.onrequest(onWebRequest);
 
 // Handles a device coming offline, and then going online.
