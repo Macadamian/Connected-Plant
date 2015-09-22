@@ -118,7 +118,7 @@ function onWebRequest(request, response) {
         else if ("all" in request.query) {
             requestSensorData(request, response);
         } else {
-            response.send(200, "{\"error\": \"Not a valid operation\"}");
+            response.send(400, "{\"error\": \"Not a valid operation\"}");
         }
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
@@ -140,8 +140,6 @@ http.onrequest(onWebRequest);
 device.onconnect(function() {
     server.log("Device connected to agent - Syncing with Server");
     fetchRegistration();
-
-    // TODO: sync alerts - with server
 });
 
 device.ondisconnect(function() {
