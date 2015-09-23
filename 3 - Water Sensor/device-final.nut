@@ -3,8 +3,8 @@ onlineLed.configure(DIGITAL_OUT);
 button <- hardware.pin1;        // tweetbutton
 
 // 1. Configure Hygrometer
-//hygrometer <- hardware.pin5;    // hygrometer pin
-//hygrometer.configure(ANALOG_IN);
+hygrometer <- hardware.pin5;    // hygrometer pin
+hygrometer.configure(ANALOG_IN);
 
 // reset our values
 local isRegistered = false;
@@ -15,15 +15,12 @@ function blink() {
         return;
     }
 
-    onlineLed.write(1 - onlineLed.read());
-    imp.wakeup(0.5, blink);
-
     // 4. Changing the blink, to turn off.
-    //onlineLed.write(0);
+    onlineLed.write(0);
 
-    //imp.wakeup(0.5, function() {
-    //    onlineLed.write(isRegistered.tointeger());
-    //});
+    imp.wakeup(0.5, function() {
+        onlineLed.write(isRegistered.tointeger());
+    });
 };
 
 function setRegistration(registerValue) {
@@ -42,13 +39,13 @@ function onButtonPressed() {
 };
 
 // 3. Request sensor data.
-//function getSensorData(val) {
-//    blink();
-//    local values = {};
-//    values.water <- hygrometer.read();
-//    values.light <- 0; // for now.
-//    agent.send("onSensorData", values);
-//};
+function getSensorData(val) {
+    blink();
+    local values = {};
+    values.water <- hygrometer.read();
+    values.light <- 0; // for now.
+    agent.send("onSensorData", values);
+};
 
 // Register handlers... Have to do it after declaring onbuttonpressed;
 // Uses embedded resistors. Reads high by default, but all of it is transparent.
@@ -57,4 +54,4 @@ button.configure(DIGITAL_IN_PULLUP, onButtonPressed);
 agent.on("setRegistration", setRegistration);
 
 // 2. agent event handler for a sensor data request.
-//agent.on("requestSensorData", getSensorData);
+agent.on("requestSensorData", getSensorData);

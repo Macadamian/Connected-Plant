@@ -1,25 +1,24 @@
-
 local serverURL = "http://iot613-officeshrub.azurewebsites.net";
 local agentId = split(http.agenturl(), "/")[2];
+local shareURL = serverURL + "/" + agentId + "/share";
 
-server.log("Set Registration [POST]: " + http.agenturl() + "?registration=true");
+server.log("Request sensor data: " + http.agenturl() + "?all=read");
+server.log("Share Status: " + shareURL);
+server.log("Set Registration [POST]: " + http.agenturl() + "register=true");
 
 function setRegistration(request, response) {
-    try {
-        local registrationValue = request.query.register == "true";
-        server.log((registrationValue == 1 ? "Registering" : "Unregistering") +  " the plant.");
+    // 2. Send a request to the device.
+    //local registrationValue = request.query.register == "true";
+    //server.log((registrationValue == 1 ? "Registering" : "Unregistering") +  " the plant.");
 
-        // turn on green led
-        device.send("setRegistration", registrationValue);
-        device.on("onSetRegistration", function(val) {
-            response.send(200, "{\"isRegistered\": \"" + val + "\"}");
-        });
+    //device.send("setRegistration", registrationValue);
 
-    } catch(err) {
-        server.log(err);
-        response.send(500, "Internal Server Error No Plant Name provided: " + err);
-    }
-}
+    // 5. Handle the response from the device...
+    //device.on("onSetRegistration", function(val) {
+    //    response.send(200, "{\"isRegistered\": \"" + val + "\"}");
+    //});
+};
+
 function onWebRequest(request, response) {
     if(!device.isconnected()) {
         response.send(404, "Device is offline.");
@@ -27,12 +26,14 @@ function onWebRequest(request, response) {
     }
 
     try {
-        if("register" in request.query &&
-            request.method == "POST") {
-            setRegistration(request, response);
-        } else {
-            response.send(400, "{\"error\": \"Not a valid operation\"}");
-        }
+        // 1. Setup the request handler
+        //if("register" in request.query &&
+        //    request.method == "POST") {
+        //    setRegistration(request, response);
+        //} 
+        //else {
+        //    response.send(400, "{\"error\": \"Not a valid operation\"}");
+        //}
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
     }

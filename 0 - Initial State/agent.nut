@@ -1,14 +1,10 @@
-
 local serverURL = "http://iot613-officeshrub.azurewebsites.net";
 local agentId = split(http.agenturl(), "/")[2];
+local shareURL = serverURL + "/" + agentId + "/share";
 
 server.log("Request sensor data: " + http.agenturl() + "?all=read");
-server.log("Set Registration: " + http.agenturl() + "register=true");
-server.log("Set Alert Mode: " + http.agenturl() + "?alert&light=on&water=on");
-
-function setRegistration(request, response) {
-    // TODO: Implement PUT registration
-};
+server.log("Share Status: " + shareURL);
+server.log("Set Registration [POST]: " + http.agenturl() + "register=true");
 
 function onWebRequest(request, response) {
     // If the device is disconnected, and we receive a request,
@@ -19,6 +15,7 @@ function onWebRequest(request, response) {
     }
 
     try {
+        // TODO: insert handling here.
         response.send(400, "{\"error\": \"Not a valid operation\"}");
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
