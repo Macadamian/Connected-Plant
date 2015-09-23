@@ -19,18 +19,6 @@ function setRegistration(request, response) {
     });
 };
 
-function requestSensorData(request, response) {
-    // 6. relaying the request
-    // device.send("requestSensorData", 0);
-
-    // 7. Handling the request, and formatting it for the server.
-    //device.on("onSensorData", function(val) {
-    //    server.log("Water Sensor: " + val.water + " Light Sensor: " + val.light);
-    //    response.send(200, "{\"water\": \"" + val.water + "\", \"light\": \"" + val.light + "\"}");
-    //});
-};
-
-
 function onWebRequest(request, response) {
     if(!device.isconnected()) {
         response.send(404, "Device is offline.");
@@ -38,27 +26,17 @@ function onWebRequest(request, response) {
     }
 
     try {
+        // 1. Setup the request handler
         if("register" in request.query &&
             request.method == "POST") {
             setRegistration(request, response);
-        }
-        // 5. Connected Plant Sensor query handling.
-        // else if ("all" in request.query) {
-        //    requestSensorData(request, response);
-        // }
-        else {
+        } else {
             response.send(400, "{\"error\": \"Not a valid operation\"}");
         }
     } catch (ex) {
         response.send(500, "Internal Server Error: " + ex);
     }
 };
-
-device.on("onButtonPressed", function(data){
-    local request = http.post(shareURL, {}, "");
-    local response = request.sendsync();
-    server.log("button press statuscode: " + response.statuscode);
-});
 
 // This line is important. It allows the imp cloud to process any HTTP request that we make to the electricimp.
 http.onrequest(onWebRequest);

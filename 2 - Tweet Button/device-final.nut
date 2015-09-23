@@ -2,7 +2,7 @@ onlineLed <- hardware.pin9;      // registration state, plant is "online"
 onlineLed.configure(DIGITAL_OUT);
 
 // 1. Initialize the button.
-//button <- hardware.pin1;        // tweetbutton*/
+button <- hardware.pin1;        // tweetbutton
 
 // reset our values
 local isRegistered = false;
@@ -26,16 +26,16 @@ function setRegistration(registerValue) {
 };
 
 // 3. Create function that handles the state.
-//function onButtonPressed() {
-//    local state = button.read();
-//    if(state == 1) {
-//        agent.send("onButtonPressed", state);
-//    }
-//};
+function onButtonPressed() {
+    local state = button.read();
+    if(state == 1) {
+        agent.send("onButtonPressed", state);
+    }
+};
 
 // Register handlers... Have to do it after declaring onbuttonpressed;
 // Uses embedded resistors. Reads high by default, but all of it is transparent.
 // 2. Configure the button as a pull up.
-// button.configure(DIGITAL_IN_PULLUP, onButtonPressed);
+button.configure(DIGITAL_IN_PULLUP, onButtonPressed);
 
 agent.on("setRegistration", setRegistration);

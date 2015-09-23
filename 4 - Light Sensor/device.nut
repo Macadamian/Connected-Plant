@@ -1,11 +1,12 @@
 onlineLed <- hardware.pin9;      // registration state, plant is "online"
-button <- hardware.pin1;        // tweetbutton
-photosensor <- hardware.pin2;   // photo sensor pin
-hygrometer <- hardware.pin5;    // hygrometer pin
-
 onlineLed.configure(DIGITAL_OUT);
-photosensor.configure(ANALOG_IN);
+button <- hardware.pin1;        // tweetbutton
+hygrometer <- hardware.pin5;    // hygrometer pin
 hygrometer.configure(ANALOG_IN);
+
+// 1. setup pins
+//photosensor <- hardware.pin2;   // photo sensor pin
+//photosensor.configure(ANALOG_IN);
 
 // reset our values
 local isRegistered = false;
@@ -16,6 +17,7 @@ function blink() {
         return;
     }
 
+    // 4. Changing the blink, to turn off.
     onlineLed.write(0);
 
     imp.wakeup(0.5, function() {
@@ -27,16 +29,8 @@ function setRegistration(registerValue) {
     server.log("setRegistrationCalled :" + registerValue);
     isRegistered = registerValue;
     onlineLed.write(isRegistered ? 1 : 0);
-    agent.send("onSetRegistration", isRegistered);
-};
-
-function getSensorData(val) {
     blink();
-
-    local values = {};
-    values.water <- hygrometer.read();
-    values.light <- photosensor.read();
-    agent.send("onSensorData", values);
+    agent.send("onSetRegistration", isRegistered);
 };
 
 function onButtonPressed() {
@@ -46,9 +40,21 @@ function onButtonPressed() {
     }
 };
 
+function getSensorData(val) {
+    blink();
+    local values = {};
+    values.water <- hygrometer.read();
+    values.light <- 0; // for now.
+    // 2. read from the photosensor
+    // values.light <- photosensor.read();
+    agent.send("onSensorData", values);
+};
+
 // Register handlers... Have to do it after declaring onbuttonpressed;
+// Uses embedded resistors. Reads high by default, but all of it is transparent.
 button.configure(DIGITAL_IN_PULLUP, onButtonPressed);
 
-// Register a handler for "led" messages from the agent
-agent.on("requestSensorData", getSensorData);
 agent.on("setRegistration", setRegistration);
+
+// 2. agent event handler for a sensor data request.
+agent.on("requestSensorData", getSensorData);

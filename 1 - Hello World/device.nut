@@ -1,25 +1,36 @@
-onlineLed <- hardware.pin9;      // registration state, plant is "online"
-onlineLed.configure(DIGITAL_OUT);
+// 3. Configure Pin #9
+// onlineLed <- hardware.pin9;      // registration state, plant is "online"
+// onlineLed.configure(DIGITAL_OUT);
 
-// reset our values
-local isRegistered = false;
-onlineLed.write(0);
+// 4. Initialize things.
+// local isRegistered = false;
+// onlineLed.write(0);
 
-function blink() {
-    if(!isRegistered) {
-        return;
-    }
-
-    onlineLed.write(1 - onlineLed.read());
-    imp.wakeup(0.5, blink);
-};
+// 9. Actual blinking.
+//function blink() {
+//    if(!isRegistered) {
+//        return;
+//    }
+//
+//    onlineLed.write(1 - onlineLed.read());
+//    imp.wakeup(0.5, blink);
+//};
 
 function setRegistration(registerValue) {
-    server.log("setRegistrationCalled :" + registerValue);
-    isRegistered = registerValue;
-    onlineLed.write(isRegistered ? 1 : 0);
-    blink();
-    agent.send("onSetRegistration", isRegistered);
+// 7. Setup registration - based on the value provided by the agent.
+//    server.log("setRegistrationCalled :" + registerValue);
+//    isRegistered = registerValue;
+//    onlineLed.write(isRegistered.tointeger());
+
+
+// 8. return a response registration.
+//    agent.send("onSetRegistration", isRegistered);
+
+
+// 10. Enabling the blinking.
+//    blink();
+
 };
 
-agent.on("setRegistration", setRegistration);
+// 6. Need to handle messages from the agent!
+// agent.on("setRegistration", setRegistration);
