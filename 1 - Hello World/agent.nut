@@ -30,7 +30,7 @@ function onWebRequest(request, response) {
         //if("register" in request.query &&
         //    request.method == "POST") {
         //    setRegistration(request, response);
-        //} 
+        //}
         //else {
         //    response.send(400, "{\"error\": \"Not a valid operation\"}");
         //}
@@ -41,3 +41,31 @@ function onWebRequest(request, response) {
 
 // This line is important. It allows the imp cloud to process any HTTP request that we make to the electricimp.
 http.onrequest(onWebRequest);
+
+// Handles a device coming offline, and then going online.
+device.onconnect(function() {
+    server.log("Device connected to agent.");
+    fetchRegistration();
+});
+
+function fetchRegistration() {
+    try {
+        server.log("Fetching registration status from the server.");
+        local isRegisteredUrl = serverURL + "/" + agentId + "/registered";
+        local request = http.get(isRegisteredUrl, {});
+        local response = request.sendsync();
+
+        if(response.statuscode == 200) {
+            local data = http.jsondecode(response.body);
+            device.send("setRegistration", data.isRegistered);
+            device.on("onSetRegistration", function(value) {
+                server.log("Successfully registered device");
+            });
+        } else {
+            server.log("Could not fetch the registration.");
+        }
+
+    } catch(err) {
+        server.log("Could not fetch the registration: " + err);
+    }
+};
