@@ -49,9 +49,21 @@ function onWebRequest(request, response) {
 http.onrequest(onWebRequest);
 
 // Handles a device coming offline, and then going online.
+// Let's not bother with this until the end.
+local isConnected = false;
 device.onconnect(function() {
+    server.log("imp connected");
+    if (isConnected)
+        return;
+
     server.log("Device connected to agent.");
     fetchRegistration();
+    isConnected = true
+});
+
+device.ondisconnect(function() {
+    server.log("imp disconnected");
+    isConnected = false;
 });
 
 function fetchRegistration() {
