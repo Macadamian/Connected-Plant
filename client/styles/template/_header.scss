@@ -1,0 +1,9 @@
+// --------------------------------------------------------------------------------
+// TEMPLATE - HEADER 
+// --------------------------------------------------------------------------------
+nav 										{ @include cf(); padding:7px 10px; background:$color-gray;
+	.lft 									{ @include span(.4); }
+	.lft img 								{ height:24px; }
+	.rgt 									{ @include span(.6); }
+	.rgt img 								{ height:24px; margin-right:10px; float:right; }
+}

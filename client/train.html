@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <title>Office Shrub Dashboard</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Office Shrub</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                  <span class="navbar-right">
+                    <img src="http://cdn.macadamian.com/wp-content/uploads/macadamian-logo-frame-version-430x83.png" class="logo-img">
+                  </span>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Training</h1>
+                <p>Help our plant to learn about the typical questions that you would ask.</p>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row"><h2>Categorize a question</h2></div>
+            <div class="row">
+                <form>
+                    <div class="form-group">
+                        <label for="question">Question</label>
+                        <textarea class="form-control" id="question" placeholder="Enter the question that you want to categorize"></textarea>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="category" value="general" checked>
+                            General
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="category" value="light">
+                            Light
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="category" value="water">
+                            Water
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-default" id="save">Save</button>
+                </form>
+            </div>
+
+            <hr>
+
+            <div class="row"><h2>Test a question</h2></div>
+            <div class="row">
+                <form>
+                    <div class="form-group">
+                        <label for="question">Question</label>
+                        <textarea class="form-control" id="categorizequestion" placeholder="Enter the question that you want to check"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-default" id="try">Try it</button>
+                </form>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <h2>Download current trained data</h2>
+                <a href="/language/saved">Download data</a>
+            </div>
+
+            <hr>
+
+            <footer>
+                <p>&copy; Macadamian 2015</p>
+            </footer>
+        </div> <!-- /container -->
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <!-- Custom Office Shrub code -->
+        <script type="text/javascript">
+            $("#save").on("click", function() {
+                var data = {
+                    question: $("#question").val(),
+                    category: $("input[name=category]:checked").val()
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "/language/train",
+                    data: data,
+                    success: function(e) {
+                        //Success !
+                    }
+                });
+
+                $("#question").val("");
+            });
+
+            $("#try").on("click", function() {
+                var data = {
+                    question: $("#categorizequestion").val()
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "/language/categorize",
+                    data: data,
+                    success: function(e) {
+                        alert("Category for your question is: " + e.category);
+                    }
+                });
+            });
+
+        </script>
+
+        <!-- D3 charting -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+    </body>
+
+</html>

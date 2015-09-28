@@ -1,0 +1,37 @@
+// --------------------------------------------------------------------------------
+// BASE - FONTS 
+// --------------------------------------------------------------------------------
+@charset "UTF-8";
+
+@font-face {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/avenir/Avenir.eot');
+  src: url('../fonts/avenir/Avenir.eot#iefix') format('embedded-opentype'),
+       url('../fonts/avenir/Avenir.woff') format('woff'),
+       url('../fonts/avenir/Avenir.ttf') format('truetype'),
+       url('../fonts/avenir/Avenir.svg') format('svg');
+}
+
+@font-face {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/avenir/AvenirMedium.eot');
+  src: url('../fonts/avenir/AvenirMedium.eot#iefix') format('embedded-opentype'),
+       url('../fonts/avenir/AvenirMedium.woff') format('woff'),
+       url('../fonts/avenir/AvenirMedium.ttf') format('truetype'),
+       url('../fonts/avenir/AvenirMedium.svg') format('svg');
+}
+
+@font-face {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/avenirHeavy.eot');
+  src: url('../fonts/avenirHeavy.eot#iefix') format('embedded-opentype'),
+       url('../fonts/avenir/AvenirHeavy.woff') format('woff'),
+       url('../fonts/avenir/AvenirHeavy.ttf') format('truetype'),
+       url('../fonts/avenir/AvenirHeavy.svg') format('svg');
+}

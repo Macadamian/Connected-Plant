@@ -1,0 +1,21 @@
+{
+  "name": "officeshrub",
+  "version": "0.1.0",
+  "description": "A connected plant.  Yes.  Connected.  Plant.",
+  "homepage": "",
+  "repository": "partners.macadamian.com:29418/macbench-officshrub",
+  "devDependencies": {},
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "*",
+    "natural": "*",
+    "request": "*",
+    "twit": "*",
+    "socket.io": "*",
+    "node-schedule": "*"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "license": "MIT"
+}

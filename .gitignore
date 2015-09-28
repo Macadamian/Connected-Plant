@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+*.log*
+*DS_Store
+*diagnostics.zip
+*diagnostics/
+node_modules

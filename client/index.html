@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Office Shrub</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+    <body>
+        <nav>
+            <div class="lft">
+                <a href="index.html"><img src="images/logo.svg" alt="Office Shrub" /></a>
+            </div>
+            <div class="rgt">
+                <a href="http://www.macadamian.com"><img src="http://cdn.macadamian.com/wp-content/uploads/macadamian-logo-frame-version-430x83.png" class="logo-img"></a>
+            </div>
+        </nav>
+
+        <main class="v-main"role="main">
+
+            <div class="m-jumbotron">
+                <h1>Office Shrub will help prevent the untimely doom of your office plants!</h1>
+                <p>
+                    As part of the <a href="http://iot613.com/">IoT613</a> conference in Ottawa, Canada, Macadamian developed a simple IOT solution that will provide up to the minute light and water levels for your office plants.
+                    Watch your plants tweet with the press of a button or when you talk to them on Twitter.
+                    Follow the default plant on <a href="https://www.twitter.com/office_shrub">Twitter</a>!
+                </p>
+                <a class="m-btn m-btn-positive" href="register.html" role="button">Register Now &raquo;</a>
+            </div>
+
+            <div class="plant-selection">
+                <div class="select-con">
+                    <select id="plant_name">
+                        <option value="office_shrub">Default (Office Shrub)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="graphs">
+                <div class="lft">
+                    <div class="title"><img src="images/sun.svg" alt="Light Level" /><h2>Light</h2></div>
+                    <div id="lightChart"></div>
+                    <div class="more">More &raquo;</div>
+                </div>
+                <div class="rgt">
+                    <div class="title"><img src="images/water-drops.svg" alt="Water Level" /><h2>Water Level</h2></div>
+                    <div id="waterChart"></div>
+                    <div class="more">More &raquo;</div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>&copy; Macadamian 2015</p>
+        </footer>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <!-- Custom Office Shrub code -->
+        <script type="text/javascript" src="js/officeshrub.js"></script>
+
+        <!-- D3 charting -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+    </body>
+</html>

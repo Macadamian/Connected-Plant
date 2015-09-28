@@ -1,0 +1,9 @@
+// --------------------------------------------------------------------------------
+// MODUELS - BUTTON
+// --------------------------------------------------------------------------------
+.m-btn                                      { width:120px; padding:10px; display:block; text-align:center; font-size:0.938em; font-weight:$font-weight-bold; cursor:pointer; }
+.m-btn:hover                                { text-decoration:none; }
+
+.m-btn-positive                             { background:$color-gray; color:$color-white; }
+.m-btn-negative                             { }
+.m-btn-nuetral                              { }

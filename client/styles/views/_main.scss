@@ -1,0 +1,37 @@
+// --------------------------------------------------------------------------------
+// VIEWS - MAIN
+// --------------------------------------------------------------------------------
+.v-main                                     {
+    .m-jumbotron .m-btn                     { width:140px; }
+ 
+    .plant-selection                        { @include cf(); padding:10px 20px 10px 20px; background:$color-gray-lighter-1; border-bottom:1px solid $color-gray-lighter-2;
+        .select-con                         { float:right; background:$color-gray; }
+    }
+
+    .graphs                                 { @include cf(); margin:40px;
+        .title                              { @include cf(); margin-bottom:10px; 
+            img                             { height:30px; float:left; margin-right:5px; display:block; }
+            h2                              { margin-top:2px; float:left; display:block; color:$color-white; }
+        }
+
+        > div                               { @include col(.5); height:400px; padding:10px; position:relative; }
+        
+        .lft                                { background:$color-yellow; }
+        .rgt                                { background:$color-blue; 
+            #waterChart                     { margin-top:80px; }
+        }
+
+        .more                               { display:none; position:absolute; right:10px; bottom:10px; color:$color-white; font-size:0.813em; font-weight:$font-weight-light; cursor:pointer; }
+    }
+    @media (max-width:768px)                {
+        .graphs .lft                        { @include col(1); }
+        .graphs .rgt                        { @include col(1); margin-top:20px; }
+    }
+
+    // C3 overrides
+    .c3-chart-arcs-background               { fill:$color-gray; }
+    .c3-chart-line                          { fill:$color-gray; }
+    .c3-event-rect                          { fill:$color-gray; }
+    .c3-arc-water-level                     { fill:$color-white; }
+    .c3-xgrid-focus                         { stroke:$color-gray; }
+}

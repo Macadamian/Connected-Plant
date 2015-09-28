@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Office Shrub Dashboard</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+
+    <body>
+        <nav>
+            <div class="lft">
+                <a href="index.html"><img src="images/logo.svg" alt="Office Shrub" /></a>
+            </div>
+            <div class="rgt">
+                <a href="http://www.macadamian.com"><img src="http://cdn.macadamian.com/wp-content/uploads/macadamian-logo-frame-version-430x83.png" class="logo-img"></a>
+            </div>
+        </nav>
+
+        <main class="v-register"role="main">
+
+            <div class="m-jumbotron">
+                <h1>Plant Registration</h1>
+                <p>Add a new plant to Office Shrub's greenhouse. Make sure the information is accurate! Once registered, the server will start tracking your plant.</p>
+            </div>
+
+            <form>
+                <label for="name">Plant Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Plant Name">
+                <label for="handle">Twitter Handle:</label>
+                <input type="text" class="form-control" id="handle" placeholder="@twitterhandle">
+                <label for="consumer_key">Twitter Consumer Key:</label>
+                <input type="text" class="form-control" id="consumer_key" placeholder="Twitter Consumer Key">
+                <label for="consumer_secret">Twitter Consumer Secret:</label>
+                <input type="text" class="form-control" id="consumer_secret" placeholder="Twitter Consumer Secret">
+                <label for="access_token">Twitter Access Token:</label>
+                <input type="text" class="form-control" id="access_token" placeholder="Twitter Access Token">
+                <label for="access_token_secret">Twitter Access Secret:</label>
+                <input type="text" class="form-control" id="access_token_secret" placeholder="Twitter Access Secret">
+                <label for="agentId">EImp Agent Id:</label>
+                <input type="text" class="form-control" id="agentId" placeholder="EImp Agent Id">
+                <button type="button" class="m-btn m-btn-positive" id="save">Register</button>
+            </form>
+
+        </main>
+
+        <footer>
+            <p>&copy; Macadamian 2015</p>
+        </footer>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <!-- Custom Office Shrub code -->
+        <script type="text/javascript">
+            $("#save").on("click", function() {
+                var data = {
+                    twitter: {
+                        keys: {
+                            consumer_key: $("#consumer_key").val(),
+                            consumer_secret: $("#consumer_secret").val(),
+                            access_token: $("#access_token").val(),
+                            access_token_secret: $("#access_token_secret").val()
+                        },
+                        handle: $("#handle").val()
+                    },
+                    eimp: {
+                        agentId: $("#agentId").val()
+                    },
+                    name: $("#name").val()
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "/register",
+                    data: data,
+                    success: function(e) {
+                        //Success !
+                        alert("Plant was registered");
+                        window.location.replace("index.html");
+                    },
+                    error: function(resp) {
+                        alert(resp.statusText);
+                    }
+                });
+
+                $("input").val("");
+            });
+        </script>
+
+    </body>
+</html>

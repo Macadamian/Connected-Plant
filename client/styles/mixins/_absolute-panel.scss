@@ -1,0 +1,15 @@
+/* -------------------------------------------------------------------------------- */
+/* MIXINS - ABSOLUTE PANEL
+/* -------------------------------------------------------------------------------- */
+@mixin absolute-panel($width, $min-width, $height, $top, $right, $bottom, $left, $background) {
+	position:absolute; 
+
+	@if ($width) 		{ width:$width; }
+	@if ($min-width) 	{ min-width:$min-width; }
+	@if ($height) 		{ height:$height; }
+	@if ($top) 			{ top:$top; }
+	@if ($right) 		{ right:$right; }	
+	@if ($bottom) 		{ bottom:$bottom; }
+	@if ($left) 		{ left:$left; }
+	@if ($background) 	{ background:$background; }
+}
